@@ -5,4 +5,25 @@ title: Все теги
 
 <h1>Все теги</h1>
 
-{% include tag-cloud.html %}
+{% assign tags = site.posts | map: 'tags' | join: ',' | split: ',' | sort %}
+{% assign unique_tags = '' | split: ',' %}
+
+<!-- Убираем дубли -->
+{% for tag in tags %}
+  {% if tag != "" and unique_tags contains tag == false %}
+    {% assign unique_tags = unique_tags | push: tag %}
+  {% endif %}
+{% endfor %}
+
+{% for tag in unique_tags %}
+  <h2 id="{{ tag | slugify }}">{{ tag }} ({{ site.tags[tag] | size }})</h2>
+  <ul>
+    {% for post in site.tags[tag] %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <small>{{ post.date | date_to_string }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+  <hr>
+{% endfor %}
