@@ -31,4 +31,14 @@ title: Главная
 <hr>
 
 <h2>Теги</h2>
+<div class="tag-cloud">
+  {% assign tags = site.tags %}
+  {% for tag in tags %}
+    <a href="/tags.html#{{ tag[0] | slugify }}">
+      {{ tag[0] }} ({{ tag[1].size }})
+    </a>
+  {% endfor %}
+</div>
+
+<h2>Теги</h2>
 {% include tag-cloud.html %}
