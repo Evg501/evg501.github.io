@@ -32,20 +32,10 @@ title: Главная
 
 <h2>Теги</h2>
 <div class="tag-cloud">
-  {% assign tags = site.posts | map: 'tags' | join: ',' | split: ',' | sort %}
-  {% assign unique_tags = '' | split: ',' %}
-
-  <!-- Убираем дубли -->
+  {% assign tags = site.tags | sort %}
   {% for tag in tags %}
-    {% if tag != "" and unique_tags contains tag == false %}
-      {% assign unique_tags = unique_tags | push: tag %}
-    {% endif %}
-  {% endfor %}
-
-  {% for tag in unique_tags %}
-    {% assign count = site.tags[tag] | size %}
-    <a href="/tags.html#{{ tag | slugify }}" title="{{ count }} постов">
-      {{ tag }} ({{ count }})
+    <a href="/tags.html#{{ tag[0] | slugify }}" class="tag-size-{{ tag[1].size }}">
+      {{ tag[0] }} ({{ tag[1].size }})
     </a>
   {% endfor %}
 </div>
