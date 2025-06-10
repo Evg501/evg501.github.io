@@ -29,6 +29,7 @@ github_username:  Evg501
 paginate: 5
 paginate_path: "/page/:num/"
 
+markdown: kramdown
 # Build settings
 theme: minima
 plugins:

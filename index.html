@@ -5,7 +5,7 @@ title: Главная
 
 <h1>Последние посты</h1>
 
-<ul>
+<ul class="post-list">
   {% for post in paginator.posts %}
     <li>
       <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
@@ -32,13 +32,20 @@ title: Главная
 
 <h2>Теги</h2>
 <div class="tag-cloud">
-  {% assign tags = site.tags %}
+  {% assign tags = site.posts | map: 'tags' | join: ',' | split: ',' | sort %}
+  {% assign unique_tags = '' | split: ',' %}
+
+  <!-- Убираем дубли -->
   {% for tag in tags %}
-    <a href="/tags.html#{{ tag[0] | slugify }}">
-      {{ tag[0] }} ({{ tag[1].size }})
+    {% if tag != "" and unique_tags contains tag == false %}
+      {% assign unique_tags = unique_tags | push: tag %}
+    {% endif %}
+  {% endfor %}
+
+  {% for tag in unique_tags %}
+    {% assign count = site.tags[tag] | size %}
+    <a href="/tags.html#{{ tag | slugify }}" title="{{ count }} постов">
+      {{ tag }} ({{ count }})
     </a>
   {% endfor %}
 </div>
-
-<h2>Теги</h2>
-{% include tag-cloud.html %}
