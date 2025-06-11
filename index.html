@@ -22,7 +22,7 @@ title: Главная
                             </span>
                             <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                                 {% for tag in post.tags %}
-                                  {{tag}}
+                                  <a href="/tags.html#{{ tag | slugify }}" class="hover:underline">{{ tag }}</a>
                                 {% endfor %}   
                             </span>
                         </div>
