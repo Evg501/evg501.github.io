@@ -1,26 +1,94 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tag-cloud a {
+            transition: all 0.3s ease;
+        }
+        
+        .tag-cloud a:hover {
+            transform: translateY(-2px);
+        }
+        
+        .post-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1><a href="/">{{ site.title }}</a></h1>
-    <p>{{ site.description }}</p>
-    <nav>
-      <a href="/">Главная</a> | 
-      <a href="/tags.html">Теги</a>
-    </nav>
-  </header>
+<body class="min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold gradient-text">{{ site.title }}</h1>
+                <p>{{ site.description }}</p>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="/" class="text-slate-700 hover:text-blue-600 font-medium">Главная</a>
+                    <a href="/tags.html" class="text-slate-700 hover:text-blue-600 font-medium">Тэги</a>
+                    <a href="#" class="text-slate-700 hover:text-blue-600 font-medium">Архив</a>
+                    <a href="#" class="text-slate-700 hover:text-blue-600 font-medium">Обо мне</a>
+                </nav>
+                <button class="md:hidden text-slate-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <main>
-    {{ content }}
-  </main>
+    <main class="container mx-auto px-4 py-8">
+      {{ content }}
+    </main>
 
-  <footer>
-    <p>&copy; {{ site.author }} {{ site.time | date: '%Y' }}</p>
-  </footer>
+    <footer class="bg-white border-t border-slate-100 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 mb-4 md:mb-0">
+                  &copy; {{ site.author }} {{ site.time | date: '%Y' }} EVG501 Blog. All rights reserved.  
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-500 hover:text-blue-600">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-slate-500 hover:text-black">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-slate-500 hover:text-blue-700">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality could be added here
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Blog loaded!');
+        });
+    </script>
 </body>
 </html>
