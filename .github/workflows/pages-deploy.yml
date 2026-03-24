@@ -33,11 +33,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          # Кэш отключён для надёжности
+          node-version: '20'  # ✅ Важно: Node 20 для Chirpy 7.x
 
       - name: Install npm dependencies
-        run: npm install  # Используем install вместо ci
+        run: npm install
 
       - name: Build assets
         run: npm run build
