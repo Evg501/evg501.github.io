@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Важно для Chirpy (нужна история коммитов)
+          fetch-depth: 0
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -33,15 +33,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Chirpy требует Node 16+
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+          node-version: '18'
+          # Кэш отключён для надёжности
 
       - name: Install npm dependencies
-        run: npm ci  # или npm install, если нет package-lock.json
+        run: npm install  # Используем install вместо ci
 
-      - name: Build assets (SCSS → CSS)
-        run: npm run build  # Компилирует Bootstrap и другие стили
+      - name: Build assets
+        run: npm run build
 
       - name: Setup Pages
         id: pages
